@@ -1,0 +1,29 @@
+{
+  "extends": ["airbnb", "prettier"],
+  "plugins": ["prettier"],
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es2021": true
+  },
+
+  "overrides": [],
+  "parserOptions": {
+    "ecmaVersion": "latest"
+  },
+  "rules": {
+    "no-console": "off",
+    "max-classes-per-file": ["error", { "ignoreExpressions": true, "max": 5 }],
+    "no-alert": "off",
+    "prettier/prettier": [
+      "error",
+      {
+        "trailingComma": "all",
+        "semi": true,
+        "printWidth": 80,
+        "tabWidth": 2,
+        "endOfLine": "auto"
+      }
+    ]
+  }
+}
