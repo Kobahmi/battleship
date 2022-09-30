@@ -4,6 +4,10 @@ class GameBoard {
     this.missedAttacks = [];
   }
 
+  getGameBoard = () => this.gameBoardArray;
+
+  getMissedAttacksArray = () => this.missedAttacks;
+
   createGameBoard = () => {
     const array = [];
     let arrayItem = [];
@@ -16,8 +20,6 @@ class GameBoard {
     }
     return array;
   };
-
-  getGameBoard = () => this.gameBoardArray;
 
   checkIfShipPlacementIsValid(length, x, y) {
     if (x > 10 || x < 0 || y > 10 || y < 0 || y + length > 10) {
@@ -49,8 +51,6 @@ class GameBoard {
       );
     }
   };
-
-  getMissedAttacksArray = () => this.missedAttacks;
 
   checkIfAllShipSunk = () => {
     let key = true;

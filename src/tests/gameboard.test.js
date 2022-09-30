@@ -2,12 +2,12 @@ import GameBoard from "../gameboard";
 import Ship from "../ship";
 
 describe("gameboard", () => {
-  test("gameboard array elements has the right object", () => {
+  test("gameboard array elements with valid object", () => {
     const board = new GameBoard();
     const object = { shipName: undefined, shipIndex: undefined };
     expect(board.getGameBoard()[0][0]).toEqual(object);
   });
-  test("gameboard can place ship", () => {
+  test("gameboard valid ship placement", () => {
     const board = new GameBoard();
     const admiral = new Ship(2);
     const x = 1;
@@ -22,7 +22,7 @@ describe("gameboard", () => {
       shipIndex: 1,
     });
   });
-  test("gameboard won't place ship at invalid location", () => {
+  test("gameboard invalid ship placement", () => {
     const board = new GameBoard();
     const admiral = new Ship(2);
     const x = 1;
@@ -33,7 +33,7 @@ describe("gameboard", () => {
       shipIndex: undefined,
     });
   });
-  test("gameBoard won't place ship if the space is occupied", () => {
+  test("gameBoard invalid placement if occupied", () => {
     const board = new GameBoard();
     const admiral = new Ship(2);
     const catShip = new Ship(3);
