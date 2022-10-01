@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Battleship</title>
+    <title>BATTLECAT</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -15,6 +15,75 @@
     <script defer src="main.js"></script>
   </head>
   <body>
-    <div class="content"></div>
+    <header class="header">
+      <h1>BATTLECAT</h1>
+      <img src="./images/mark.svg" alt="logo" />
+    </header>
+    <div class="content">
+      <div class="playerSide">
+        <div class="player-name">PLAYER</div>
+        <div class="playerBoard"></div>
+      </div>
+
+      <div class="aiSide">
+        <div class="computer-name">COMPUTER</div>
+        <div class="computerBoard"></div>
+      </div>
+    </div>
+    <div class="addShips">
+      <div class="ship" id="battleship" draggable="true">
+        <div class="block"></div>
+        <div class="block"></div>
+        <div class="block"></div>
+        <div class="block"></div>
+      </div>
+      <div class="ship" id="carrier" draggable="true">
+        <div class="block"></div>
+        <div class="block"></div>
+        <div class="block"></div>
+        <div class="block"></div>
+        <div class="block"></div>
+      </div>
+      <div class="ship" id="submarine" draggable="true">
+        <div class="block"></div>
+        <div class="block"></div>
+        <div class="block"></div>
+      </div>
+      <div class="ship" id="destroyer" draggable="true">
+        <div class="block"></div>
+        <div class="block"></div>
+        <div class="block"></div>
+      </div>
+      <div class="ship" id="patrolboat" draggable="true">
+        <div class="block"></div>
+        <div class="block"></div>
+      </div>
+    </div>
+
+    <dialog class="modal-one">
+      <form class="form-one" method="dialog">
+        <div class="text-container">
+          <h1>WELCOME TO BATTLECAT!</h1>
+          <h2>WHO'S PLAYING?</h2>
+        </div>
+        <div class="button-container">
+          <input
+            type="text"
+            class="player-name-input"
+            name="name"
+            placeholder="Name"
+            required
+          />
+          <button type="submit">START</button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog class="modal-two">
+      <form class="form-two" method="dialog">
+        <div class="winner-text"></div>
+        <button type="submit">RESTART?</button>
+      </form>
+    </dialog>
   </body>
 </html>
