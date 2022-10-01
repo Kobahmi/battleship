@@ -1,0 +1,205 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+:root {
+  --font-size-modal: 2rem;
+  --font-family: Dynapuff, sans-serif;
+  --background-pink: rgb(255, 240, 242);
+  --font-color: rgb(116, 0, 87);
+}
+
+body {
+  font-family: var(--font-family);
+  color: var(--font-color);
+  position: relative;
+}
+
+.modal-one {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  border: none;
+  border-radius: 10px 10px 200px 200px;
+  width: clamp(10rem, 60rem, 80rem);
+  height: 30rem;
+  padding: 3rem;
+  background-color: var(--background-pink);
+  color: var(--font-color);
+  animation: fadeIn 1s;
+}
+
+.modal-two {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  border: none;
+  border-radius: 10px 10px 200px 200px;
+  width: clamp(10rem, 60rem, 80rem);
+  height: 30rem;
+  padding: 3rem;
+  background-color: var(--background-pink);
+  color: var(--font-color);
+  animation: fadeIn 1s;
+}
+
+.modal-one::backdrop {
+  background-color: white;
+}
+
+.modal-two::backdrop {
+  background-color: white;
+}
+
+.form-one {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.form-two {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.text-container {
+  font-size: var(--font-size-modal);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5.5rem;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.button-container input {
+  width: 18rem;
+  height: 3rem;
+  border-radius: 5px;
+  border: none;
+  padding: 1rem;
+  outline: none;
+  font-family: var(--font-family);
+  font-size: var(--font-size-modal);
+  color: var(--font-color);
+}
+
+.button-container button {
+  width: 10rem;
+  height: 4.5rem;
+  border: none;
+  border-radius: 20px;
+  font-family: var(--font-family);
+  font-size: var(--font-size-modal);
+  background-color: var(--font-color);
+  color: white;
+  transition: 0.2s ease-in-out;
+}
+
+.button-container button:hover {
+  cursor: pointer;
+  filter: brightness(110%);
+  scale: 105%;
+}
+
+.header {
+  font-size: var(--font-size-modal);
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  padding: 2rem;
+  background-color: var(--background-pink);
+}
+
+.header img {
+  width: 5rem;
+  transition: 0.2s ease-in-out;
+}
+
+.header img:hover {
+  rotate: 20deg;
+}
+
+.content {
+  display: flex;
+  justify-content: center;
+  font-size: var(--font-size-modal);
+  padding: 2rem;
+  gap: 15rem;
+  animation: 3s fadeIn;
+}
+
+.addShips {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.block {
+  border: 1px solid black;
+  width: 2rem;
+  height: 2rem;
+}
+
+.playerBoard,
+.computerBoard {
+  width: 20rem;
+  height: 20rem;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+}
+
+.cell {
+  border: var(--font-color) 1px solid;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2rem;
+  height: 2rem;
+}
+
+.playerSide {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  gap: 0.5rem;
+}
+
+.aiSide {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  gap: 0.5rem;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    scale: 0%;
+  }
+
+  70% {
+    scale: 110%;
+  }
+  100% {
+    opacity: 1;
+    scale: 100%;
+  }
+}

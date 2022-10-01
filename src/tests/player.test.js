@@ -24,7 +24,7 @@ describe("player", () => {
     const player1 = new Player("bobby");
     const player2 = new Player("rocky");
     const captain = new Ship(1);
-    enemyBoard.placeShip(captain, 0, 0);
+    enemyBoard.placeShip(captain, 0, 0, "v");
     player1.attack(0, 0, player2, enemyBoard);
     expect(captain.getShip()[0].hit).toBe(true);
   });
@@ -33,7 +33,7 @@ describe("player", () => {
     const player1 = new Player("bobby");
     const player2 = new Player("rocky");
     const captain = new Ship(1);
-    enemyBoard.placeShip(captain, 0, 0);
+    enemyBoard.placeShip(captain, 0, 0, "v");
     player1.attack(0, 0, player2, enemyBoard);
     expect(player1.checkTurn()).toBe(false);
     expect(player2.checkTurn()).toBe(true);
