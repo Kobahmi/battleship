@@ -12,6 +12,7 @@
   --background-pink: rgb(255, 240, 242);
   --font-color: rgb(116, 0, 87);
   --occupied-color: rgba(240, 180, 255, 0.8);
+  --hit-color: rgb(255, 155, 155);
 }
 
 body {
@@ -280,7 +281,7 @@ body {
 
 .hit {
   background-image: url(./images/mark.svg);
-  background-color: var(--occupied-color);
+  background-color: var(--hit-color);
 }
 
 @keyframes fadeIn {
