@@ -247,7 +247,7 @@ body {
 .rotate button {
   background-color: var(--font-color);
   border: none;
-  border-radius: 40px;
+  border-radius: 41px;
   padding: 0.5rem;
   color: var(--background-pink);
   font-family: var(--font-family);
