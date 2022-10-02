@@ -7,12 +7,8 @@ import Ship from "./ship";
 const modalOne = document.querySelector(".modal-one");
 const modalTwo = document.querySelector(".modal-two");
 const formOne = document.querySelector(".form-one");
-const formTwo = document.querySelector(".form-two");
 const nameInput = document.querySelector(".player-name-input");
 const playerName = document.querySelector(".player-name");
-const computerName = document.querySelector(".computer-name");
-const playerBoardDisplay = document.querySelector(".playerBoard");
-const computerBoardDisplay = document.querySelector(".computerBoard");
 const addShips = document.querySelector(".addShips");
 const battleshipHTML = document.querySelector("#battleship");
 const carrierHTML = document.querySelector("#carrier");
@@ -21,11 +17,9 @@ const destroyerHTML = document.querySelector("#destroyer");
 const patrolboatHTML = document.querySelector("#patrolboat");
 const aiSide = document.querySelector(".aiSide");
 const winnerText = document.querySelector(".winner-text");
-
-// ADD GRID DRAG STYLE
-// ADD PAWS AND CATS ON GRID
-// FINISH WINNERS MODAL AND ADD RESTART BTN
-// TOUCH UP
+const rotateBtn = document.querySelector(".rotation");
+const rotateDisplay = document.querySelector(".rotate");
+const restartBtn = document.querySelector(".restart");
 
 // Player Ships
 const carrier = new Ship(5);
@@ -58,13 +52,17 @@ formOne.addEventListener("submit", (e) => {
   modalOne.close();
 });
 
-const addPlayerToDisplay = (name) => {
-  playerName.textContent = name;
-};
+rotateBtn.addEventListener("click", () => {
+  battleshipHTML.classList.toggle("rotated");
+  carrierHTML.classList.toggle("rotated");
+  submarineHTML.classList.toggle("rotated");
+  destroyerHTML.classList.toggle("rotated");
+  patrolboatHTML.classList.toggle("rotated");
+});
 
-const addComputerToDisplay = (name) => {
-  computerName.textContent = name;
-};
+restartBtn.addEventListener("click", () => {
+  window.location.reload();
+});
 
 const dragStarter = (element) => {
   element.addEventListener("dragstart", (e) => {
@@ -78,14 +76,28 @@ function placeAIShip(ship) {
     const firstNumber = Math.floor(Math.random() * 10);
     const secondNumber = Math.floor(Math.random() * 10);
     numberArray = [firstNumber, secondNumber];
-    if (
+    const randomNumber = Math.floor(Math.random() * 2);
+    if (randomNumber === 1) {
+      if (
+        computerBoard.checkIfShipPlacementIsValid(
+          ship.getLength(),
+          numberArray[0],
+          numberArray[1],
+          "v"
+        )
+      ) {
+        computerBoard.placeShip(ship, numberArray[0], numberArray[1], "v");
+        break;
+      }
+    } else if (
       computerBoard.checkIfShipPlacementIsValid(
         ship.getLength(),
         numberArray[0],
-        numberArray[1]
+        numberArray[1],
+        "h"
       )
     ) {
-      computerBoard.placeShip(ship, numberArray[0], numberArray[1], "v");
+      computerBoard.placeShip(ship, numberArray[0], numberArray[1], "h");
       break;
     }
   }
@@ -139,7 +151,22 @@ const dropShip = (e) => {
   const y = parseInt(e.target.getAttribute("data-y"));
   switch (data) {
     case "battleship":
-      if (playerBoard.checkIfShipPlacementIsValid(battleship.length, x, y)) {
+      if (
+        playerBoard.checkIfShipPlacementIsValid(battleship.length, x, y, "h") &&
+        battleshipHTML.classList.contains("rotated")
+      ) {
+        playerBoard.placeShip(battleship, x, y, "h");
+        updateDisplay("playerBoard", playerBoard);
+        const ship = document.querySelector(`#${data}`);
+        addShips.removeChild(ship);
+        if (addShips.childNodes.length <= 6) {
+          addShips.style.display = "none";
+          aiSide.style.display = "flex";
+          rotateDisplay.style.display = "none";
+        }
+      } else if (
+        playerBoard.checkIfShipPlacementIsValid(battleship.length, x, y, "v")
+      ) {
         playerBoard.placeShip(battleship, x, y, "v");
         updateDisplay("playerBoard", playerBoard);
         const ship = document.querySelector(`#${data}`);
@@ -147,23 +174,54 @@ const dropShip = (e) => {
         if (addShips.childNodes.length <= 6) {
           addShips.style.display = "none";
           aiSide.style.display = "flex";
+          rotateDisplay.style.display = "none";
         }
       }
       break;
     case "carrier":
-      if (playerBoard.checkIfShipPlacementIsValid(carrier.length, x, y)) {
-        playerBoard.placeShip(carrier, x, y, "v");
+      if (
+        playerBoard.checkIfShipPlacementIsValid(carrier.length, x, y, "h") &&
+        battleshipHTML.classList.contains("rotated")
+      ) {
+        playerBoard.placeShip(carrier, x, y, "h");
         updateDisplay("playerBoard", playerBoard);
         const ship = document.querySelector(`#${data}`);
         addShips.removeChild(ship);
         if (addShips.childNodes.length <= 6) {
           addShips.style.display = "none";
           aiSide.style.display = "flex";
+          rotateDisplay.style.display = "none";
+        }
+      } else if (
+        playerBoard.checkIfShipPlacementIsValid(carrier.length, x, y, "v")
+      ) {
+        playerBoard.placeShip(carrier, x, y, "v");
+        updateDisplay("playerBoard", playerBoard);
+        const ship = document.querySelector(`#${data}`);
+        addShips.removeChild(ship);
+        if (addShips.childNodes.length <= 6) {
+          addShips.style.display = "none";
+          rotateDisplay.style.display = "none";
         }
       }
       break;
     case "submarine":
-      if (playerBoard.checkIfShipPlacementIsValid(submarine.length, x, y)) {
+      if (
+        playerBoard.checkIfShipPlacementIsValid(submarine.length, x, y, "h") &&
+        submarineHTML.classList.contains("rotated")
+      ) {
+        playerBoard.placeShip(submarine, x, y, "h");
+        updateDisplay("playerBoard", playerBoard);
+        const ship = document.querySelector(`#${data}`);
+        addShips.removeChild(ship);
+        if (addShips.childNodes.length <= 6) {
+          addShips.style.display = "none";
+          aiSide.style.display = "flex";
+          rotateDisplay.style.display = "none";
+        }
+      } else if (
+        playerBoard.checkIfShipPlacementIsValid(submarine.length, x, y, "v")
+      ) {
         playerBoard.placeShip(submarine, x, y, "v");
         updateDisplay("playerBoard", playerBoard);
         const ship = document.querySelector(`#${data}`);
@@ -171,11 +229,27 @@ const dropShip = (e) => {
         if (addShips.childNodes.length <= 6) {
           addShips.style.display = "none";
           aiSide.style.display = "flex";
+          rotateDisplay.style.display = "none";
         }
       }
       break;
     case "destroyer":
-      if (playerBoard.checkIfShipPlacementIsValid(destroyer.length, x, y)) {
+      if (
+        playerBoard.checkIfShipPlacementIsValid(destroyer.length, x, y, "h") &&
+        destroyerHTML.classList.contains("rotated")
+      ) {
+        playerBoard.placeShip(destroyer, x, y, "h");
+        updateDisplay("playerBoard", playerBoard);
+        const ship = document.querySelector(`#${data}`);
+        addShips.removeChild(ship);
+        if (addShips.childNodes.length <= 6) {
+          addShips.style.display = "none";
+          aiSide.style.display = "flex";
+          rotateDisplay.style.display = "none";
+        }
+      } else if (
+        playerBoard.checkIfShipPlacementIsValid(destroyer.length, x, y, "v")
+      ) {
         playerBoard.placeShip(destroyer, x, y, "v");
         updateDisplay("playerBoard", playerBoard);
         const ship = document.querySelector(`#${data}`);
@@ -183,11 +257,27 @@ const dropShip = (e) => {
         if (addShips.childNodes.length <= 6) {
           addShips.style.display = "none";
           aiSide.style.display = "flex";
+          rotateDisplay.style.display = "none";
         }
       }
       break;
     case "patrolboat":
-      if (playerBoard.checkIfShipPlacementIsValid(patrolboat.length, x, y)) {
+      if (
+        playerBoard.checkIfShipPlacementIsValid(patrolboat.length, x, y, "h") &&
+        patrolboatHTML.classList.contains("rotated")
+      ) {
+        playerBoard.placeShip(patrolboat, x, y, "h");
+        updateDisplay("playerBoard", playerBoard);
+        const ship = document.querySelector(`#${data}`);
+        addShips.removeChild(ship);
+        if (addShips.childNodes.length <= 6) {
+          addShips.style.display = "none";
+          aiSide.style.display = "flex";
+          rotateDisplay.style.display = "none";
+        }
+      } else if (
+        playerBoard.checkIfShipPlacementIsValid(patrolboat.length, x, y, "v")
+      ) {
         playerBoard.placeShip(patrolboat, x, y, "v");
         updateDisplay("playerBoard", playerBoard);
         const ship = document.querySelector(`#${data}`);
@@ -195,6 +285,7 @@ const dropShip = (e) => {
         if (addShips.childNodes.length <= 6) {
           addShips.style.display = "none";
           aiSide.style.display = "flex";
+          rotateDisplay.style.display = "none";
         }
       }
       break;
@@ -215,7 +306,6 @@ const updateDisplay = (boardName, board) => {
           const selectedCell = document.querySelector(
             `.${boardName} [data-x="${x}"][data-y ="${y}"]`
           );
-          selectedCell.textContent = "X";
           selectedCell.classList.add("hit");
           selectedCell.classList.remove("occupied");
         } else if (
@@ -243,7 +333,7 @@ const updateDisplay = (boardName, board) => {
 
 const endGame = (winner) => {
   modalTwo.showModal();
-  winnerText.textContent = `${winner} is the winner!!`;
+  winnerText.textContent = `${winner} WINS!`;
 };
 
 // make player ships draggable

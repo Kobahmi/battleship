@@ -15,7 +15,6 @@ class AI extends Player {
     if (this.checkTurn()) {
       const numberObject = { x: undefined, y: undefined };
       while (true) {
-        // DO I NEED THIS HMMMM
         const firstNumber = Math.floor(Math.random() * 10);
         const secondNumber = Math.floor(Math.random() * 10);
         numberObject.x = firstNumber;

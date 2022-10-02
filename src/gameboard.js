@@ -21,28 +21,35 @@ class GameBoard {
     return array;
   };
 
-  checkIfShipPlacementIsValid(length, x, y) {
-    if (
-      x > 10 ||
-      x < 0 ||
-      y > 10 ||
-      y < 0 ||
-      y + length > 10 ||
-      x + length > 10 // check here if it dont work
-    ) {
-      return false;
-    }
-    for (let i = y; i < y + length; i++) {
-      if (this.gameBoardArray[i][x].shipName !== undefined) {
+  checkIfShipPlacementIsValid(length, x, y, direction) {
+    if (direction === "v") {
+      if (x > 10 || x < 0 || y > 10 || y < 0 || y + length > 10) {
         return false;
       }
+      for (let i = y; i < y + length; i++) {
+        if (this.gameBoardArray[i][x].shipName !== undefined) {
+          return false;
+        }
+      }
+      return true;
     }
-    return true;
+
+    if (direction === "h") {
+      if (x > 10 || x < 0 || y > 10 || y < 0 || x + length > 10) {
+        return false;
+      }
+      for (let i = x; i < x + length; i++) {
+        if (this.gameBoardArray[y][i].shipName !== undefined) {
+          return false;
+        }
+      }
+      return true;
+    }
   }
 
   placeShip = (ship, x, y, direction) => {
     if (direction === "v") {
-      if (this.checkIfShipPlacementIsValid(ship.getLength(), x, y)) {
+      if (this.checkIfShipPlacementIsValid(ship.getLength(), x, y, "v")) {
         for (let i = 0; i < ship.getLength(); i++) {
           this.gameBoardArray[y + i][x].shipName = ship;
           this.gameBoardArray[y + i][x].shipIndex = i;
@@ -51,7 +58,7 @@ class GameBoard {
     }
 
     if (direction === "h") {
-      if (this.checkIfShipPlacementIsValid(ship.getLength(), x, y)) {
+      if (this.checkIfShipPlacementIsValid(ship.getLength(), x, y, "h")) {
         for (let i = 0; i < ship.getLength(); i++) {
           this.gameBoardArray[y][x + i].shipName = ship;
           this.gameBoardArray[y][x + i].shipIndex = i;
