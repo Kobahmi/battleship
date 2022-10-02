@@ -21,7 +21,7 @@ const rotateBtn = document.querySelector(".rotation");
 const rotateDisplay = document.querySelector(".rotate");
 const restartBtn = document.querySelector(".restart");
 
-// Player Ships
+// Player ships
 const carrier = new Ship(5);
 const battleship = new Ship(4);
 const destroyer = new Ship(3);
@@ -83,7 +83,7 @@ function placeAIShip(ship) {
           ship.getLength(),
           numberArray[0],
           numberArray[1],
-          "v"
+          "v",
         )
       ) {
         computerBoard.placeShip(ship, numberArray[0], numberArray[1], "v");
@@ -94,7 +94,7 @@ function placeAIShip(ship) {
         ship.getLength(),
         numberArray[0],
         numberArray[1],
-        "h"
+        "h",
       )
     ) {
       computerBoard.placeShip(ship, numberArray[0], numberArray[1], "h");
@@ -304,7 +304,7 @@ const updateDisplay = (boardName, board) => {
           true
         ) {
           const selectedCell = document.querySelector(
-            `.${boardName} [data-x="${x}"][data-y ="${y}"]`
+            `.${boardName} [data-x="${x}"][data-y ="${y}"]`,
           );
           selectedCell.classList.add("hit");
           selectedCell.classList.remove("occupied");
@@ -314,7 +314,7 @@ const updateDisplay = (boardName, board) => {
         ) {
           if (boardName === "playerBoard") {
             const selectedCell = document.querySelector(
-              `.${boardName} [data-x="${x}"][data-y ="${y}"]`
+              `.${boardName} [data-x="${x}"][data-y ="${y}"]`,
             );
             selectedCell.classList.add("occupied");
           }
@@ -324,7 +324,7 @@ const updateDisplay = (boardName, board) => {
   });
   missedAttacksArray.forEach((attack) => {
     const selectedCell = document.querySelector(
-      `.${boardName} [data-x="${attack.x}"][data-y ="${attack.y}"]`
+      `.${boardName} [data-x="${attack.x}"][data-y ="${attack.y}"]`,
     );
     selectedCell.textContent = "X";
     selectedCell.classList.add("missed");
