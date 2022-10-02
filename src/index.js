@@ -83,7 +83,7 @@ function placeAIShip(ship) {
           ship.getLength(),
           numberArray[0],
           numberArray[1],
-          "v",
+          "v"
         )
       ) {
         computerBoard.placeShip(ship, numberArray[0], numberArray[1], "v");
@@ -94,7 +94,7 @@ function placeAIShip(ship) {
         ship.getLength(),
         numberArray[0],
         numberArray[1],
-        "h",
+        "h"
       )
     ) {
       computerBoard.placeShip(ship, numberArray[0], numberArray[1], "h");
@@ -201,6 +201,7 @@ const dropShip = (e) => {
         addShips.removeChild(ship);
         if (addShips.childNodes.length <= 6) {
           addShips.style.display = "none";
+          aiSide.style.display = "flex";
           rotateDisplay.style.display = "none";
         }
       }
@@ -304,7 +305,7 @@ const updateDisplay = (boardName, board) => {
           true
         ) {
           const selectedCell = document.querySelector(
-            `.${boardName} [data-x="${x}"][data-y ="${y}"]`,
+            `.${boardName} [data-x="${x}"][data-y ="${y}"]`
           );
           selectedCell.classList.add("hit");
           selectedCell.classList.remove("occupied");
@@ -314,7 +315,7 @@ const updateDisplay = (boardName, board) => {
         ) {
           if (boardName === "playerBoard") {
             const selectedCell = document.querySelector(
-              `.${boardName} [data-x="${x}"][data-y ="${y}"]`,
+              `.${boardName} [data-x="${x}"][data-y ="${y}"]`
             );
             selectedCell.classList.add("occupied");
           }
@@ -324,7 +325,7 @@ const updateDisplay = (boardName, board) => {
   });
   missedAttacksArray.forEach((attack) => {
     const selectedCell = document.querySelector(
-      `.${boardName} [data-x="${attack.x}"][data-y ="${attack.y}"]`,
+      `.${boardName} [data-x="${attack.x}"][data-y ="${attack.y}"]`
     );
     selectedCell.textContent = "X";
     selectedCell.classList.add("missed");
